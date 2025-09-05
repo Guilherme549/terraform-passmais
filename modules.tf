@@ -4,3 +4,8 @@ module "passmais_network" {
   project_name = var.project_name
   tags         = local.tags
 }
+
+module "passmais_ecr" {
+  source = "./modules/ecr"
+  
+}
