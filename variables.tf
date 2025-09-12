@@ -13,3 +13,18 @@ variable "ARN_S3_env" {
   type        = string
 
 }
+
+variable "ECR_URI_IMAGE" {
+  description = "URI da imagem do ECR"
+  type        = string
+}
+
+variable "domain_name" {
+  description = "Domain name"
+  type        = string
+}
+
+variable "record_name" {
+  description = "Record host"
+  type        = string
+}

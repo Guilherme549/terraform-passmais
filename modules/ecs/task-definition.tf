@@ -31,7 +31,7 @@ resource "aws_ecs_task_definition" "passmais_task" {
       logConfiguration = {
         logDriver = "awslogs",
         options = {
-          awslogs-group         = "/ecs/passmais-frontend-task-v1",
+          awslogs-group         = "/ecs/passmais-task-v1",
           mode                  = "non-blocking",
           awslogs-create-group  = "true",
           max-buffer-size       = "25m",
@@ -61,7 +61,7 @@ resource "aws_ecs_task_definition" "passmais_task" {
           containerPort = 5433,
           protocol      = "tcp",
           appProtocol   = "http"
-        }
+        },
       ],
       environmentFiles = [
         {
@@ -72,7 +72,7 @@ resource "aws_ecs_task_definition" "passmais_task" {
       logConfiguration = {
         logDriver = "awslogs",
         options = {
-          awslogs-group         = "/ecs/passmais-backend-task-v1",
+          awslogs-group         = "/ecs/passmais-task-v1",
           mode                  = "non-blocking",
           awslogs-create-group  = "true",
           max-buffer-size       = "25m",
@@ -106,11 +106,11 @@ resource "aws_ecs_service" "passmais_service" {
 
   load_balancer {
     target_group_arn = var.passmais_target_group_arn
-    container_name   = "api"
-    container_port   = 8000
+    container_name   = "frontend"
+    container_port   = 3000
   }
 
-  depends_on = [ var.load_balancer_arn, aws_ecs_task_definition.falana_task, var.aws_lb_listener_https, var.aws_lb_listener_http ]
+  depends_on = [ var.load_balancer_arn, aws_ecs_task_definition.passmais_task, var.aws_lb_listener_https, var.aws_lb_listener_http ]
 
   lifecycle {
     ignore_changes = [task_definition, desired_count, network_configuration, enable_execute_command]

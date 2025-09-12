@@ -1,17 +1,11 @@
-variable "ARN_S3_env" {
-  description = "URL do arquivo '.env' que está no bucket S3"
-  type        = string
-
-}
-
 variable "passmais_subnet_public_1a" {
   type        = string
-  description = "Subnet for Falana Host Lab"
+  description = "Subnet for passmais Host Lab"
 }
 
 variable "passmais_subnet_public_1b" {
   type        = string
-  description = "Subnet for Falana Host staging"
+  description = "Subnet for passmais Host staging"
 }
 
 variable "passmais_sg_id" {
@@ -27,12 +21,6 @@ variable "ECR_URI_IMAGE" {
 
 variable "ARN_S3_env" {
   description = "URL do arquivo '.env' que está no bucket S3"
-  type        = string
-
-}
-
-variable "ARN_S3_env_database" {
-  description = "URL do arquivo '.env.database' que está no bucket S3"
   type        = string
 
 }
