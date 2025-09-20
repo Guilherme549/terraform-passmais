@@ -1,0 +1,20 @@
+cidr_block   = "10.0.0.0/16"
+project_name = "passmais"
+db_password  = "" # SENHA_DO_BANCO
+db_username  = "" # USUARIO_DO_BANCO
+db_name      = "" # NOME_DO_BANCO
+
+#Nome do DB que deve ser pegado o snapshot
+db_instance_identifier_for_snapshot = ""
+
+# Route 53:
+domain_name  = "" # Insira o dominio
+record_name  = "" # Insira o subdomínio
+record_name_backend = "" # subdomínio do backend
+
+ECR_URI_IMAGE = "" # URI da imagem do ecr
+
+#Insira o caminho da ARN onde esta armazenado a .env dentro do bucket s3
+ARN_S3_env = ""
+
+ARN_S3_env_backend = ""
