@@ -14,3 +14,11 @@ variable "load_balancer_dns_name" {
   type        = string
 
 }
+
+
+variable "record_name_backend" {
+  description = "Record host do backend"
+  type        = string
+  
+}
+

@@ -39,7 +39,8 @@ resource "aws_iam_role_policy" "ecs_task_execution_role_s3_policy" {
           "s3:GetObjectVersion"
         ],
         Resource = [
-          var.ARN_S3_env
+          var.ARN_S3_env,
+          var.ARN_S3_env_backend
         ]
       }
     ]

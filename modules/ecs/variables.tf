@@ -25,6 +25,12 @@ variable "ARN_S3_env" {
 
 }
 
+variable "ARN_S3_env_backend" {
+  description = "URL do arquivo '.env' do backend que está no bucket S3"
+  type        = string
+
+}
+
 variable "rds_sg_id" {
   type        = string
   description = "ID do Security Group do RDS"
@@ -42,6 +48,13 @@ variable "passmais_target_group_arn" {
   description = "ARN do Target Group"
 
 }
+
+variable "passmais_target_group_backend_arn" {
+  type        = string
+  description = "ARN do Target Group"
+
+}
+
 
 
 variable "aws_lb_listener_https" {

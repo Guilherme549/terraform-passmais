@@ -45,7 +45,7 @@ resource "aws_ecs_task_definition" "passmais_task" {
       image     = "${var.ECR_URI_IMAGE}:backend",
       cpu       = 512,
       memory    = 1024,
-      essential = false,
+      essential = true,
       portMappings = [
         {
           containerPort = 8080,
@@ -66,7 +66,7 @@ resource "aws_ecs_task_definition" "passmais_task" {
       environmentFiles = [
         {
           type  = "s3",
-          value = var.ARN_S3_env
+          value = var.ARN_S3_env_backend
         }
       ],
       logConfiguration = {
@@ -108,6 +108,12 @@ resource "aws_ecs_service" "passmais_service" {
     target_group_arn = var.passmais_target_group_arn
     container_name   = "frontend"
     container_port   = 3000
+  }
+
+  load_balancer {
+    target_group_arn = var.passmais_target_group_backend_arn
+    container_name   = "backend"
+    container_port   = 8080
   }
 
   depends_on = [ var.load_balancer_arn, aws_ecs_task_definition.passmais_task, var.aws_lb_listener_https, var.aws_lb_listener_http ]

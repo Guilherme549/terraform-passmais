@@ -14,6 +14,19 @@ resource "aws_lb" "passmais_loadbalancer" {
   )
 }
 
+resource "aws_lb_listener" "passmais_https_listener_backend" {
+  load_balancer_arn = aws_lb.passmais_loadbalancer.arn
+  port              = "444"
+  protocol          = "HTTPS"
+  ssl_policy        = "ELBSecurityPolicy-TLS13-1-2-Res-2021-06"
+  certificate_arn   = var.cert_validation_arn_backend
+
+  default_action {
+    type             = "forward"
+    target_group_arn = var.target_group_backend_arn
+  }
+}
+
 
 resource "aws_lb_listener" "passmais_https_listener" {
   load_balancer_arn = aws_lb.passmais_loadbalancer.arn
@@ -74,3 +87,51 @@ resource "aws_lb_listener_rule" "redirect_host_header" {
 }
 
 
+resource "aws_lb_listener_rule" "redirect_host_header_backend" {
+  listener_arn = aws_lb_listener.passmais_https_listener_backend.arn
+  priority     = 10
+
+  action {
+    type = "redirect"
+
+    redirect {
+      host        = var.record_name_backend
+      port        = "444"
+      protocol    = "HTTPS"
+      status_code = "HTTP_301"
+      path        = "/#{path}"
+      query       = "#{query}"
+    }
+  }
+
+  condition {
+    host_header {
+      values = [aws_lb.passmais_loadbalancer.dns_name]
+    }
+  }
+}
+
+
+resource "aws_lb_listener_rule" "redirect_host_header_for_correct_url" {
+  listener_arn = aws_lb_listener.passmais_https_listener.arn
+  priority     = 9
+
+  action {
+    type = "redirect"
+
+    redirect {
+      host        = var.record_name
+      port        = "443"
+      protocol    = "HTTPS"
+      status_code = "HTTP_301"
+      path        = "/#{path}"
+      query       = "#{query}"
+    }
+  }
+
+  condition {
+    host_header {
+      values = [var.domain_name]
+    }
+  }
+}
