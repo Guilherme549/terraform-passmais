@@ -82,3 +82,9 @@ module "passmais_route53" {
   load_balancer_dns_name = module.passmais_loadbalancer.load_balancer_dns_name
   record_name_backend    = var.record_name_backend
 }
+
+
+module "s3_passmais" {
+  source      = "./modules/s3"
+  bucket_name = var.bucket_name
+}

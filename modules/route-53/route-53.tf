@@ -1,6 +1,6 @@
 # Referência à zona existente no Route 53
 data "aws_route53_zone" "selected" {
-  zone_id = "Z09359992ESHSNND08TB6"
+  zone_id = "Z09879133JX6OT5LLTDJT"
 }
 
 # Recurso para criação do certificado ACM

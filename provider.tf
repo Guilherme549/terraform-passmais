@@ -7,8 +7,8 @@ terraform {
   }
 
   backend "s3" {
-    bucket = "falana-variaveis-teste1"
-    key = "terraform-state/passmais/terraform.tfstate"
+    bucket = "passmais-env"
+    key    = "terraforms-state/terraform.tfstate"
     region = "us-east-1"
   }
 }

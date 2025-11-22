@@ -15,7 +15,7 @@ resource "aws_db_instance" "rds" {
 
   iam_database_authentication_enabled = false
 
-  snapshot_identifier = data.aws_db_snapshot.latest.id
+  # snapshot_identifier = data.aws_db_snapshot.latest.id
 
   vpc_security_group_ids = [aws_security_group.rds_sg.id]
   db_subnet_group_name   = aws_db_subnet_group.rds_subnet_group[each.key].name
@@ -28,7 +28,7 @@ resource "aws_db_instance" "rds" {
 
   # Enquanto possuir esta propiedade o RDS não será destruído
   lifecycle {
-    
+
     ignore_changes  = [ db_name, username]
   }
 

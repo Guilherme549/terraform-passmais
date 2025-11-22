@@ -1,5 +1,5 @@
 resource "aws_lb" "passmais_loadbalancer" {
-  name               = "passmais-prd-alb"
+  name               = "passmais"
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.alb_sg.id]
